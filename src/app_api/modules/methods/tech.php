@@ -69,14 +69,15 @@
 			if (mysqli_query($connect, $sql)) {
 			  $res = true;
 
-					require '../../libs/PHPMailer/PHPMailerAutoload.php';
+				require('../../../../libs/PHPMailer/class.phpmailer.php');	
 
 					$mail = new PHPMailer;
 
 					//$mail->SMTPDebug = 3;                              // Enable verbose debug output
 					$nombre = $fname.' '.$lname;
-					$body = file_get_contents('./mail/template.html');
+					$body = file_get_contents('mail/template.html');
 
+					$mail = new PHPMailer;
 					$mail->isSMTP();                                     // Set mailer to use SMTP
 					$mail->Host = 'smtp.gmail.com';                      // Specify main and backup SMTP servers
 					$mail->SMTPAuth = true;                              // Enable SMTP authentication
@@ -85,10 +86,11 @@
 					$mail->SMTPSecure = 'ssl';                           // Enable TLS encryption, `ssl` also accepted
 					$mail->Port = 465;                                   // TCP port to connect to
 
-					$mail->setFrom('marco.montilla@beetcg.com', 'Mailer');
-					$mail->addAddress($email_s, $nombre);     
+					$mail->From('marco.montilla@beetcg.com', 'Mailer');
+					$mail->FromName($email_s, $nombre);     
 
-					$mail->isHTML(true);                                  // Set email format to HTML
+					$mail->isHTML(true); 
+					$mail->CharSet = 'UTF-8';                                // Set email format to HTML
 			    $mail->Subject = 'Email Confirmation';
 			    $mail->Body    = $body;
 			    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
