@@ -7,7 +7,7 @@
 		public function ifExist($table, $email){
 			$obj = new connect();
 			$connect = $obj->connection();
-			$res = 'Inicialiced';
+			$res = 'Inicialiced (tech.php)';
 
 			$email_lower = strtolower($email);
 			$email_s = filter_var($email_lower, FILTER_SANITIZE_EMAIL);
@@ -17,23 +17,23 @@
 
 			if (mysqli_num_rows($result) > 0) {
 		    while($row = mysqli_fetch_assoc($result)) {
-		       $res = 'Email Exist'; 
+		       $res = 'Email Exist(tech.php)'; 
 		       break;
 		    }
 			} else {
-			    $res = 'Email Does not Exist';
+			    $res = 'Email Does not Exist (tech.php)';
 			}
 
 			mysqli_close($connect);
 
-			return array($res);
+			return $res;
 		}
 
 		// Add User
 		public function create($fname,$lname,$email,$pass,$tlf,$zip){
 			$obj = new connect();
 			$connect = $obj->connection();
-			$res = 'Inicialiced';
+			$res = 'Inicialiced (tech.php)';
 			date_default_timezone_set('America/Guatemala');
 
 			$id = uniqid();
@@ -42,31 +42,26 @@
 			$email_lower = strtolower($email);
 			$email_s = filter_var($email_lower, FILTER_SANITIZE_EMAIL);
 			$activate_code = md5(uniqid()).uniqid();
-			$date = date('m/d/Y H:i:s', time());
+			$date = date("Y-m-d H:i:s"), time();
+			
+			$sql= "INSERT INTO tech (__id, fname, lname, email, tlf, zip, question, answer, salt, hash, activate_code, active, hardware, printing, security, television, virus, network, telephone, servers, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip',null,null,'$salt','$hash','$activate_code','0','0','0','0','0','0','0','0','0','$date','$date')";
 
-			$aux1 = 'Do you want to have an apple?';
-			$aux2 = 'yes I Want to';
-
-			$sql= "INSERT INTO tech(__id,fname,lname,email,zip,tlf,question,answer,salt,hash,activate_code,active,created_at,update_at,hardware,printing,security,television,virus,network,telephone,servers) VALUES ('$id',$fname','$lname','$email_s','$zip','$tlf','$aux1','$aux2','$salt','$hash','$activate_code','0','$date','$date','0','0','0','0','0','0','0','0')";
-
-			$result = mysqli_query($connect, $sql);
-
-			if ($result) {
-			  $res = 'Save Technician';
+			if (mysqli_query($connect, $sql)) {
+			  $res = 'Save Technician (tech.php)';
 			} else {
-			  $res = 'Dont Save Technician';
+			  $res = 'Dont Save Technician (tech.php)';
 			}
 
 			mysqli_close($connect);
-
-			return array($res, $result);
+			
+			return $res;
 		}
 
 		// try to Connect
 		public function tryToConnect(){
 			$obj = new connect();
 			$connect = $obj->connection();
-			$res = 'Inicialized';
+			$res = 'Inicialized (tech.php)';
 
 			$sql = "SELECT * FROM tech";
 			$result = mysqli_query($connect, $sql);
@@ -74,14 +69,14 @@
 			if (mysqli_num_rows($result) > 0) {
 			    // output data of each row
 			    while($row = mysqli_fetch_assoc($result)) {
-			      $res = 'Connected';
+			      $res = 'Connected (tech.php)';
 			      break;
 			    }
 			} else {
-			    $res = 'Not Connected';
+			    $res = 'Not Connected (tech.php)';
 			}
 
-			mysqli_lcose($connect);
+			mysqli_close($connect);
 			
 			return $res;
 		}

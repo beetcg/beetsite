@@ -4,7 +4,7 @@
 	require_once "./../methods/tech.php";
 
 	$res = [];
-	
+
 	$obj = new Methods();
 	$resp = $obj->tryToConnect();
 	$res['Connection'] = $resp;
@@ -25,12 +25,12 @@
 				$resp = $obj->ifExist('tech', $email);
 				$res['found'] = $resp;
 
-				if ($res['found'] === 'Email Does not Exist') {
+				if ($res['found'] == 'Email Does not Exist (tech.php)') {
 					$obj = new Methods();
 					$resp = $obj->create($fname,$lname,$email,$pass,$tlf,$zip);
 					$res['save'] = $resp;
 				} else {
-					$res['save'] = 'Dont Save Technician';
+					$res['save'] = 'Dont Save Technician (create.php)';
 				}
 			}
 		}
