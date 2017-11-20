@@ -1,6 +1,6 @@
 {
 	"create": {
-		"url": "./src/app_api/modules/api_technician/create.php",
+		"url": "./src/app_api/modules/technician/crud/create.php",
 		"type": "POST"
 	},
 	"show" : {

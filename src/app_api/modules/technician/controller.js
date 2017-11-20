@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
 	var route = {};
 
-	$.getJSON( "./src/app_api/modules/api_technician/routes.json", function( data ) {
+	$.getJSON( "./src/app_api/modules/technician/routes.json", function( data ) {
 		route = data; 
 		console.log(data)
 	});
@@ -22,10 +22,13 @@ $( document ).ready(function() {
 			type: route.create.type,
 			data: $('#form_create').serialize(),
 			success: function (resp) {
+				// result = JSON.parse(resp)
+				// console.log(result)
+
 				$('#form_create')[0].reset()
 				$('#form_message').html('<div class="alert alert-secondary alert-dismissible fade show"> '+
-											 '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>'+
-											 '<br/><pre>'+ resp + '<pre> </div>')
+											 					'<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>'+
+											 					'<pre>'+ resp + '<pre> </div>')
 			},
 			error: function (jqXHR,estado,error) {
 				console.log('----------------------')

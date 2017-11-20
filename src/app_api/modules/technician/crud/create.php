@@ -1,13 +1,13 @@
 <?php
 
-	require_once "./../../config/connection.php";
-	require_once "./../methods/tech.php";
+	require_once "../../../config/connection.php";
+	require_once "../../methods/tech.php";
 
 	$res = [];
 
 	$obj = new Methods();
 	$resp = $obj->tryToConnect();
-	$res['Connection'] = $resp;
+	$res['connection'] = $resp;
 
 	if(!empty($_POST)){
 		$fname = $_POST["fname"];
@@ -25,12 +25,12 @@
 				$resp = $obj->ifExist('tech', $email);
 				$res['found'] = $resp;
 
-				if ($res['found'] == 'Email Does not Exist (tech.php)') {
+				if (!$res['found']) {
 					$obj = new Methods();
 					$resp = $obj->create($fname,$lname,$email,$pass,$tlf,$zip);
 					$res['save'] = $resp;
 				} else {
-					$res['save'] = 'Dont Save Technician (create.php)';
+					$res['save'] = false;
 				}
 			}
 		}
