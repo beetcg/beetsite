@@ -1,0 +1,18 @@
+{
+	"create": {
+		"url": "./src/app_api/modules/api_technician/create.php",
+		"type": "POST"
+	},
+	"show" : {
+		"url" : "",
+		"type" : "GET"
+	},
+	"update" : {
+		"url" : "",
+		"type" : "PUT"
+	},
+	"delete" : {
+		"url" : "",
+		"type" : "DELETE"
+	}
+}

@@ -1,0 +1,10 @@
+body {
+	padding-top: 65px;
+	background-color: #eee;
+}
+
+#form_create {
+	padding: 15px;
+	border-radius: 1%;
+	background-color: rgba(0,0,0,0.3);
+}
