@@ -3,9 +3,9 @@
 		"url": "./src/app_api/modules/technician/crud/create.php",
 		"type": "POST"
 	},
-	"show" : {
-		"url" : "",
-		"type" : "GET"
+	"confirm" : {
+		"url" : "./src/app_api/modules/technician/crud/confirm.php",
+		"type" : "POST"
 	},
 	"update" : {
 		"url" : "",

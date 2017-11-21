@@ -64,8 +64,8 @@
 			  $res = true;
 
 			  $obj = new Mailer();
-			  $messageHtml = $obj->contentHtml($fname,$lname);
-			  $messagePlain = $obj->contentPlain($fname,$lname);
+			  $messageHtml = $obj->contentHtml($fname,$lname,$id,$salt);
+			  $messagePlain = $obj->contentPlain($fname,$lname,$id,$salt);
 
 				$mail = new PHPMailer(true);
 				try {
@@ -95,6 +95,25 @@
 
 			mysqli_close($connect);
 			
+			return $res;
+		}
+
+		// Confirm acount
+		public function confirmAcount($table, $id, $salt){
+			$obj = new connect();
+			$connect = $obj->connection();
+
+			$sql= "SELECT * FROM $table WHERE __id='$id' AND salt='$salt';";
+			$result = mysqli_query($connect, $sql);
+
+			if (mysqli_num_rows($result) > 0) {
+			  while($row = mysqli_fetch_assoc($result)) {
+			    $res = $row;
+			    break;
+			  }
+			}
+
+			mysqli_close($connect);
 			return $res;
 		}
 
