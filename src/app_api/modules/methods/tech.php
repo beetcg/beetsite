@@ -1,6 +1,9 @@
 <?php
+  use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+
 	/**
-	* This is a Methods class
+	* This is the Methods Class
 	*/
 	class Methods {
 		// try to Connect
@@ -9,23 +12,13 @@
 			$connect = $obj->connection();
 			$res = false;
 
-			$sql = "SELECT * FROM tech";
-			$result = mysqli_query($connect, $sql);
-
-			if (mysqli_num_rows($result) > 0) {
-			    // output data of each row
-			    while($row = mysqli_fetch_assoc($result)) {
-			      $res = true;
-			      break;
-			    }
-			}
-
+			if (mysqli_ping($connect)) { $res = true; }
 			mysqli_close($connect);
 			
 			return $res;
 		}
 
-		// If exist the user 
+		// If exist the User 
 		public function ifExist($table, $email){
 			$obj = new connect();
 			$connect = $obj->connection();
@@ -49,7 +42,7 @@
 			return $res;
 		}
 
-		// Add User
+		// Create User
 		public function create($fname,$lname,$email,$pass,$tlf,$zip){
 			$obj = new connect();
 			$connect = $obj->connection();
@@ -67,41 +60,37 @@
 			$sql= "INSERT INTO tech (__id, fname, lname, email, tlf, zip, question, answer, salt, hash, activate_code, active, hardware, printing, security, television, virus, network, telephone, servers, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip',null,null,'$salt','$hash','$activate_code','0','0','0','0','0','0','0','0','0','$date','$date')";
 
 			if (mysqli_query($connect, $sql)) {
+			  
 			  $res = true;
 
-				require('../../../../libs/PHPMailer/class.phpmailer.php');	
+			  $obj = new Mailer();
+			  $messageHtml = $obj->contentHtml($fname,$lname);
+			  $messagePlain = $obj->contentPlain($fname,$lname);
 
-					$mail = new PHPMailer;
+				$mail = new PHPMailer(true);
+				try {
 
-					//$mail->SMTPDebug = 3;                              // Enable verbose debug output
-					$nombre = $fname.' '.$lname;
-					$body = file_get_contents('mail/template.html');
+			    //Server settings
+			    $mail->isSMTP();
+			    $mail->Host = 'smtp.gmail.com';
+			    $mail->SMTPAuth = true;
+			    $mail->Username = 'marco.jr1695@gmail.com';
+			    $mail->Password = 'Marco1695';
+			    $mail->SMTPSecure = 'tls';
+    			$mail->Port = 587;
 
-					$mail = new PHPMailer;
-					$mail->isSMTP();                                     // Set mailer to use SMTP
-					$mail->Host = 'smtp.gmail.com';                      // Specify main and backup SMTP servers
-					$mail->SMTPAuth = true;                              // Enable SMTP authentication
-					$mail->Username = 'marco.montilla@beetcg.com';       // SMTP username
-					$mail->Password = 'Marco1695';                       // SMTP password
-					$mail->SMTPSecure = 'ssl';                           // Enable TLS encryption, `ssl` also accepted
-					$mail->Port = 465;                                   // TCP port to connect to
+			    //Recipients
+			    $mail->setFrom('marco.jr1695@gmail.com', 'Beet');
+			    $mail->addAddress($email_s, $fname.' '.$lname);
+			    $mail->isHTML(true);
+			    $mail->Subject = 'Hi '.$fname.' - Confirmation Message';
+			    $mail->Body = $messageHtml;
+			    $mail->AltBody = $messagePlain;
 
-					$mail->From('marco.montilla@beetcg.com', 'Mailer');
-					$mail->FromName($email_s, $nombre);     
-
-					$mail->isHTML(true); 
-					$mail->CharSet = 'UTF-8';                                // Set email format to HTML
-			    $mail->Subject = 'Email Confirmation';
-			    $mail->Body    = $body;
-			    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-					if(!$mail->send()) {
-					    echo 'Error, mensaje no enviado';
-					    echo 'Error del mensaje: ' . $mail->ErrorInfo;
-					} else {
-					    echo 'El mensaje se ha enviado correctamente';
-					    
-					}
+			    $mail->send();
+				} catch (Exception $e) {
+				    echo 'Mailer Error: ' . $mail->ErrorInfo;
+				}
 			}
 
 			mysqli_close($connect);

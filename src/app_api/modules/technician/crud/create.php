@@ -1,7 +1,8 @@
 <?php
-
+	require_once "./../../../../../vendor/autoload.php";
 	require_once "../../../config/connection.php";
 	require_once "../../methods/tech.php";
+	require_once "../../methods/mail/mail.php";
 
 	$res = [];
 
