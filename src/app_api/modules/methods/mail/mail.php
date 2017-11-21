@@ -16,12 +16,12 @@
 			$message .= '	<table align="center" style="border:1px solid #fff;max-width:700px;">';
 			$message .= '		<tr>';
 			$message .= '			<td colspan="5" style="width:100%;text-align:center;vertical-align:middle">';
-			$message .= '				<img src="http://comiczone.hol.es/beet/src/app_api/modules/methods/mail/logo.png" style="max-width:147px;">';
+			$message .= '				<img src="http://comiczone.hol.es/beet/src/assets/img/logo.png" style="max-width:147px;">';
 			$message .= '			</td>';
 			$message .= '		</tr>';
 			$message .= '		<tr>';
 			$message .= '			<td colspan="5" style="width:100%;text-align:center;vertical-align:middle">';
-			$message .= '				<img src="http://comiczone.hol.es/beet/src/app_api/modules/methods/mail/banner.jpg">';
+			$message .= '				<img src="http://comiczone.hol.es/beet/src/assets/img/banner.jpg">';
 			$message .= '			</td>';
 			$message .= '		</tr>';
 			$message .= '		<tr>';
@@ -87,5 +87,4 @@
 			
 			return $message;
 		}
-
 	}
