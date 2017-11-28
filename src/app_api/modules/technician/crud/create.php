@@ -5,6 +5,8 @@
 	require_once "./../../methods/tech.php";
 
 	$res = [];
+	$res['found'] = false;
+	$res['save'] = false;
 
 	$obj = new Methods();
 	$resp = $obj->tryToConnect();
