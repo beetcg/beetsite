@@ -35,6 +35,9 @@
 					<div class="form-group">
 				    <label for="id_card">Documentation</label>
 				    <input type="file" class="form-control-file" id="id_card">
+				    <div class="invalid-feedback">
+			        The IMAGE is invalid
+			      </div>
 				  </div>
 				  <div class="form-check form-check-inline">
 					  <label class="form-check-label">
@@ -77,6 +80,9 @@
 					    <input class="form-check-input" type="checkbox" id="servers" value="1"> Servers
 					  </label>
 					</div>
+					<div class="invalid-feedback" id="cbm">
+			        At least one has to be selected
+			    </div>
 
 					<input type="hidden" id="id" name="id" value="<?php echo $id ?>">
 					<input type="hidden" id="salt" name="salt" value="<?php echo $salt ?>">

@@ -19,42 +19,71 @@
 				    	type="text" 
 				    	class="form-control" 
 				    	name="fname" 
+				    	id="fname" 
 				    	placeholder="First Name">
+				    	<div class="invalid-feedback">
+				        Is invThe FIRST NAME is invalid
+				      </div>
 				  </div>
 					<div class="form-group">
 				    <input 
 				    	type="text" 
 				    	class="form-control" 
 				    	name="lname" 
+				    	id="lname" 
 				    	placeholder="Last Name">
+				    	<div class="invalid-feedback">
+				        The LAST NAME is invalid
+				      </div>
 				  </div>
 					<div class="form-group">
 				    <input 
 				    	type="email" 
 				    	class="form-control" 
 				    	name="email" 
+				    	id="email" 
 				    	placeholder="Email">
+				    	<div class="invalid-feedback">
+				        The EMAIL is invalid
+				      </div>
 				  </div>
 					<div class="form-group">
 				    <input 
 				    	type="password" 
 				    	class="form-control" 
 				    	name="pass" 
+				    	id="pass" 
 				    	placeholder="Password">
+				    	<div class="invalid-feedback">
+				        The PASSWORD is invalid
+				        <ul>
+				        	<li>at least 8 characters</li>
+				        	<li>must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number</li>
+				        	<li>Can contain special characters</li>
+				        </ul>
+				      </div>
 				  </div>
 					<div class="form-group">
 				    <input 
 				    	type="text" 
 				    	class="form-control" 
 				    	name="tlf" 
+				    	id="tlf" 
 				    	placeholder="Mobile">
+				    	<div class="invalid-feedback">
+				        The PHONE is invalid
+				      </div>
 				  </div>
 					<div class="form-group">
 				    <input 
 				    	type="text" 
 				    	class="form-control" 
 				    	name="zip" 
+				    	id="zip" 
 				    	placeholder="Zip Code">
+				    	<div class="invalid-feedback">
+				        The ZIP CODE is invalid
+				      </div>
 				  </div>
 					<button type="submit" class="btn btn-dark btn-block"><span id="sub">Submit</span></button>
 				</form>
