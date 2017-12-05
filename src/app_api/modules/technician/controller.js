@@ -31,14 +31,14 @@ $( document ).ready(function() {
 						$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
 					}
 					console.log(res)
-					$('#form_message').html(	
+					$('#form_message').html(
 						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
 						'		<ul>'+
 						'			<li>Connection : '+res.connection+'</li>'+
 						'			<li>Found : '+res.found+'</li>'+
 						'			<li>Save : '+res.save+'</li>'+
 						'		</ul>'+
-						'		<button class="close" data-dismiss="alert" aria-label="Close">'+ 
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
 						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
 						'		</button>'+
 						'</div>' )
@@ -50,14 +50,13 @@ $( document ).ready(function() {
 					console.log(error)
 				},
 				complete: function (jqXHR,estado) {
-				},
-				timeout: 10000
+				}
 			})
 		} else {
-			$('#form_message').html(	
+			$('#form_message').html(
 						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
 						'		<h3>Validation problems</h3>'+
-						'		<button class="close" data-dismiss="alert" aria-label="Close">'+ 
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
 						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
 						'		</button>'+
 						'</div>' )
@@ -146,14 +145,13 @@ $( document ).ready(function() {
 							console.log(error)
 						},
 						complete: function (jqXHR,estado) {
-						},
-						// timeout: 10000
+						}
 					})
 				} else {
-					$('#form_message').html(	
+					$('#form_message').html(
 								'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
 								'		<h3>Validation problems</h3>'+
-								'		<button class="close" data-dismiss="alert" aria-label="Close">'+ 
+								'		<button class="close" data-dismiss="alert" aria-label="Close">'+
 								'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
 								'		</button>'+
 								'</div>' )
@@ -179,7 +177,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -196,7 +194,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -214,7 +212,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -222,10 +220,10 @@ $( document ).ready(function() {
 	/**
 	* Accepts:
 	* | +42 555.123.4567 | +1-(800)-123-4567 | +7 555 1234567   | +7(926)1234567  | (926) 1234567
-	*	| +79261234567     | 926 1234567       | 9261234567       | 1234567         | 123-4567 
-	*	| 123-89-01        | 495 1234567       | 469 123 45 67    | 89261234567     | 8 (926) 1234567 
-	*	| 926.123.4567     | 415-555-1234      | 650-555-2345     | (416)555-3456   | 202 555 4567      
-	*	| 4035555678       | 1 416 555 9292    | 0424 620 0101    | 0424-620-0101   | 0424-620-01-01   
+	*	| +79261234567     | 926 1234567       | 9261234567       | 1234567         | 123-4567
+	*	| 123-89-01        | 495 1234567       | 469 123 45 67    | 89261234567     | 8 (926) 1234567
+	*	| 926.123.4567     | 415-555-1234      | 650-555-2345     | (416)555-3456   | 202 555 4567
+	*	| 4035555678       | 1 416 555 9292    | 0424 620 0101    | 0424-620-0101   | 0424-620-01-01
 	*	| (424) 620 0101   | (424)-620-0101    | +54 424 620 0101
 	*/
 	function validateTelephone(input, str){
@@ -237,7 +235,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -255,7 +253,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -275,19 +273,19 @@ $( document ).ready(function() {
 				} else {
 					$(input).addClass('is-invalid')
 					$(input).removeClass('is-valid')
-					
+
 					return false
 				}
 			}else {
 				$(input).addClass('is-invalid')
 				$(input).removeClass('is-valid')
-				
+
 				return false
 			}
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}

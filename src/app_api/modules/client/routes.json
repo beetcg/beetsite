@@ -3,6 +3,10 @@
 		"url": "./src/app_api/modules/client/crud/create.php",
 		"type": "POST"
 	},
+	"recovery" : {
+		"url" : "./src/app_api/modules/client/crud/recovery.php",
+		"type" : "POST"
+	},
 	"update" : {
 		"url" : "",
 		"type" : "PUT"

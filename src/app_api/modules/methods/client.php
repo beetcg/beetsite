@@ -57,7 +57,7 @@
 			$activate_code = md5(uniqid()).uniqid();
 			$date = date("Y-m-d H:i:s", time());
 
-			$sql= "INSERT INTO client (__id, fname, lname, email, tlf, zip, salt, hash, active, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip','$salt','$hash','$date','$date')";
+			$sql= "INSERT INTO client (__id, fname, lname, email, tlf, zip, salt, hash, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip','$salt','$hash','$date','$date')";
 
 			if (mysqli_query($connect, $sql)) {
 

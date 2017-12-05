@@ -50,8 +50,7 @@ $( document ).ready(function() {
 					console.log(error)
 				},
 				complete: function (jqXHR,estado) {
-				},
-				timeout: 10000
+				}
 			})
 		} else {
 			$('#form_message').html(
@@ -62,9 +61,64 @@ $( document ).ready(function() {
 						'		</button>'+
 						'</div>' )
 		}
+	})
 
+	/** Recovery Form */
+	$('#recovery_form_client').on('submit',function(e){
+		e.preventDefault()
+
+		var exp = validateEmail('#email' ,$("#email").val())
+
+		if (exp) {
+			$.ajax({
+				beforeSend: function (){
+					$('#sub').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
+				},
+				url: route.recovery.url,
+				type: route.recovery.type,
+				data: $('#form_create').serialize(),
+				success: function (resp) {
+					res = JSON.parse(resp)
+					if (res.save == true) {
+						$('#form_create')[0].reset()
+						$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
+					} else {
+						$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+					}
+					console.log(res)
+					$('#form_message').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<ul>'+
+						'			<li>Connection : '+res.connection+'</li>'+
+						'			<li>Found : '+res.found+'</li>'+
+						'			<li>Save : '+res.save+'</li>'+
+						'		</ul>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+				},
+				error: function (jqXHR,estado,error) {
+					console.log('----------------------')
+					console.log('Status: Entro en error')
+					console.log(estado)
+					console.log(error)
+				},
+				complete: function (jqXHR,estado) {
+				}
+			})
+		} else {
+			$('#form_message').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<h3>Validation problems</h3>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+		}
 	})
 });
+
 
 /** Validate Functions -----------------------*/
 

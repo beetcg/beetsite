@@ -114,15 +114,15 @@
 			$message .= '		<tr>';
 			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;">';
 			$message .= '				<p style="font-size:1rem;">	';
-			$message .= '					We are so happy to receive your subscription, to complete it you need to fill in some ';
-			$message .= '					important information, by pressing the following button you will be redirected.';
+			$message .= '					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore ';
+			$message .= '					et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.';
 			$message .= '				</p>';
 			$message .= '				<br>';
 			$message .= '			</td>';
 			$message .= '		</tr>';
 			$message .= '		<tr>';
 			$message .= '			<td colspan="5" align="center" style="text-align:center;padding-left:30px;padding-right:30px;">';
-			$message .= '				<a href="http://comiczone.hol.es/confirmation.php?x='.$id.'&y='.$salt.'"';
+			$message .= '				<a href="http://comiczone.hol.es/active.php?x='.$id.'&y='.$salt.'"';
 			$message .= '				style="text-align: center;white-space: nowrap;vertical-align: middle;font-size: 1rem;';
 			$message .= '				line-height: 1.5;border: 1px solid #840037;padding: 0.375rem 0.75rem;cursor:pointer;color:#840037;';
 			$message .= '				text-decoration:none;';
