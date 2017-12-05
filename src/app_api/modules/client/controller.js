@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 
 	var route = {};
-	$.getJSON("./src/app_api/modules/technician/routes.json", function(data) { route = data; });
+	$.getJSON("./src/app_api/modules/client/routes.json", function(data) { route = data; });
 
 	/** Create Form */
 	$('#form_create').on('submit',function(e){
@@ -31,14 +31,14 @@ $( document ).ready(function() {
 						$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
 					}
 					console.log(res)
-					$('#form_message').html(	
+					$('#form_message').html(
 						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
 						'		<ul>'+
 						'			<li>Connection : '+res.connection+'</li>'+
 						'			<li>Found : '+res.found+'</li>'+
 						'			<li>Save : '+res.save+'</li>'+
 						'		</ul>'+
-						'		<button class="close" data-dismiss="alert" aria-label="Close">'+ 
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
 						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
 						'		</button>'+
 						'</div>' )
@@ -54,112 +54,16 @@ $( document ).ready(function() {
 				timeout: 10000
 			})
 		} else {
-			$('#form_message').html(	
+			$('#form_message').html(
 						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
 						'		<h3>Validation problems</h3>'+
-						'		<button class="close" data-dismiss="alert" aria-label="Close">'+ 
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
 						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
 						'		</button>'+
 						'</div>' )
 		}
 
 	})
-
-	/** Confirm Form */
-	$('#form_confirm').on('submit',function(e){
-				e.preventDefault()
-
-				var formData = new FormData;
-				formData.append('id', $('#id').val())
-				formData.append('salt', $('#salt').val())
-
-				formData.append('id_card', $('#id_card')[0].files[0])
-
-				if ($('#hardware').is(':checked')) {
-					formData.append('hardware', $('#hardware').val())
-				} else {
-					formData.append('hardware', '0')
-				}
-				if ($('#printing').is(':checked')) {
-					formData.append('printing', $('#printing').val())
-				} else {
-					formData.append('printing', '0')
-				}
-				if ($('#security').is(':checked')) {
-					formData.append('security', $('#security').val())
-				} else {
-					formData.append('security', '0')
-				}
-				if ($('#television').is(':checked')) {
-					formData.append('television', $('#television').val())
-				} else {
-					formData.append('television', '0')
-				}
-				if ($('#virus').is(':checked')) {
-					formData.append('virus', $('#virus').val())
-				} else {
-					formData.append('virus', '0')
-				}
-				if ($('#network').is(':checked')) {
-					formData.append('network', $('#network').val())
-				} else {
-					formData.append('network', '0')
-				}
-				if ($('#telephone').is(':checked')) {
-					formData.append('telephone', $('#telephone').val())
-				} else {
-					formData.append('telephone', '0')
-				}
-				if ($('#servers').is(':checked')) {
-					formData.append('servers', $('#servers').val())
-				} else {
-					formData.append('servers', '0')
-				}
-
-				var exp1 = validateImage('#id_card' , $('#id_card')[0].files[0])
-				var exp2 = validateCheckbox()
-
-				if (exp1 && exp2) {
-					$.ajax({
-						beforeSend: function (){
-							$('#sub').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
-						},
-						url: route.confirm.url,
-						type: route.confirm.type,
-						data: formData,
-						processData: false,
-						contentType: false,
-						cache: false,
-						success: function (resp) {
-							var res = JSON.parse(resp)
-							console.log(res)
-							if (res.update == true) {
-								$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
-							} else {
-								$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
-							}
-						},
-						error: function (jqXHR,estado,error) {
-							console.log('----------------------')
-							console.log('Status: Entro en error')
-							console.log(estado)
-							console.log(error)
-						},
-						complete: function (jqXHR,estado) {
-						},
-						// timeout: 10000
-					})
-				} else {
-					$('#form_message').html(	
-								'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
-								'		<h3>Validation problems</h3>'+
-								'		<button class="close" data-dismiss="alert" aria-label="Close">'+ 
-								'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
-								'		</button>'+
-								'</div>' )
-				}
-	})
-
 });
 
 /** Validate Functions -----------------------*/
@@ -179,7 +83,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -196,7 +100,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -214,7 +118,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -222,10 +126,10 @@ $( document ).ready(function() {
 	/**
 	* Accepts:
 	* | +42 555.123.4567 | +1-(800)-123-4567 | +7 555 1234567   | +7(926)1234567  | (926) 1234567
-	*	| +79261234567     | 926 1234567       | 9261234567       | 1234567         | 123-4567 
-	*	| 123-89-01        | 495 1234567       | 469 123 45 67    | 89261234567     | 8 (926) 1234567 
-	*	| 926.123.4567     | 415-555-1234      | 650-555-2345     | (416)555-3456   | 202 555 4567      
-	*	| 4035555678       | 1 416 555 9292    | 0424 620 0101    | 0424-620-0101   | 0424-620-01-01   
+	*	| +79261234567     | 926 1234567       | 9261234567       | 1234567         | 123-4567
+	*	| 123-89-01        | 495 1234567       | 469 123 45 67    | 89261234567     | 8 (926) 1234567
+	*	| 926.123.4567     | 415-555-1234      | 650-555-2345     | (416)555-3456   | 202 555 4567
+	*	| 4035555678       | 1 416 555 9292    | 0424 620 0101    | 0424-620-0101   | 0424-620-01-01
 	*	| (424) 620 0101   | (424)-620-0101    | +54 424 620 0101
 	*/
 	function validateTelephone(input, str){
@@ -237,7 +141,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -255,7 +159,7 @@ $( document ).ready(function() {
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}
@@ -275,19 +179,19 @@ $( document ).ready(function() {
 				} else {
 					$(input).addClass('is-invalid')
 					$(input).removeClass('is-valid')
-					
+
 					return false
 				}
 			}else {
 				$(input).addClass('is-invalid')
 				$(input).removeClass('is-valid')
-				
+
 				return false
 			}
 		} else {
 			$(input).addClass('is-invalid')
 			$(input).removeClass('is-valid')
-			
+
 			return false
 		}
 	}

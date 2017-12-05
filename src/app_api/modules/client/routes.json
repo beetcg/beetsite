@@ -1,0 +1,14 @@
+{
+	"create": {
+		"url": "./src/app_api/modules/client/crud/create.php",
+		"type": "POST"
+	},
+	"update" : {
+		"url" : "",
+		"type" : "PUT"
+	},
+	"delete" : {
+		"url" : "",
+		"type" : "DELETE"
+	}
+}
