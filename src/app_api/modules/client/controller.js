@@ -67,23 +67,23 @@ $( document ).ready(function() {
 	$('#recovery_form_client').on('submit',function(e){
 		e.preventDefault()
 
-		var exp = validateEmail('#email' ,$("#email").val())
+		var exp = validateEmail('#emailRC' ,$("#emailRC").val())
 
 		if (exp) {
 			$.ajax({
 				beforeSend: function (){
-					$('#sub').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
+					$('#subRC').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
 				},
 				url: route.recovery.url,
 				type: route.recovery.type,
-				data: $('#form_create').serialize(),
+				data: $('#recovery_form_client').serialize(),
 				success: function (resp) {
 					res = JSON.parse(resp)
 					if (res.save == true) {
-						$('#form_create')[0].reset()
-						$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
+						$('#recovery_form_client')[0].reset()
+						$('#subRC').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
 					} else {
-						$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+						$('#subRC').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
 					}
 					console.log(res)
 					$('#form_message').html(

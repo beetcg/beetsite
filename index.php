@@ -113,7 +113,7 @@
 						    	type="email"
 						    	class="form-control"
 						    	name="email"
-						    	id="email"
+						    	id="emailRT"
 						    	placeholder="Email">
 						    	<div class="invalid-feedback">
 						        The EMAIL is invalid
@@ -122,7 +122,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="submit" class="btn btn-primary">Recovery</button>
+		        <button type="submit" class="btn btn-primary"><span id="subRC">Client</span></button>
 		      </div>
 				</form>
 	    </div>
@@ -146,7 +146,7 @@
 						    	type="email"
 						    	class="form-control"
 						    	name="email"
-						    	id="email"
+						    	id="emailRC"
 						    	placeholder="Email">
 						    	<div class="invalid-feedback">
 						        The EMAIL is invalid

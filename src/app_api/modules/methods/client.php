@@ -98,7 +98,7 @@
 			return $res;
 		}
 
-		// Confirm acount
+		// Check acount
 		public function checkAcount($table, $id, $salt){
 			$obj = new connect();
 			$connect = $obj->connection();
@@ -142,4 +142,60 @@
 			return $res;
 		}
 
-	}
+		// Recovery Password
+		public function recovery($table, $email){
+      $obj = new connect();
+			$connect = $obj->connection();
+			$res = false;
+
+			$email_lower = strtolower($email);
+			$email_s = filter_var($email_lower, FILTER_SANITIZE_EMAIL);
+
+      $sql= "SELECT * FROM $table WHERE email='$email_s'";
+			$result = mysqli_query($connect, $sql);
+
+			if (mysqli_num_rows($result) > 0) {
+			  while($row = mysqli_fetch_assoc($result)) {
+			    $data = $row;
+			    break;
+			  }
+			}
+			mysqli_close($connect);
+
+      if ($data) {
+        $obj = new Mailer();
+        $messageHtml = $obj->recoveryClientHtml($data['fname'],$data['lname'],$data['id'],$data['salt']);
+        $messagePlain = 'Hello';
+
+        $mail = new PHPMailer(true);
+        try {
+
+          //Server settings
+          $mail->isSMTP();
+          $mail->Host = 'smtp.gmail.com';
+          $mail->SMTPAuth = true;
+          $mail->Username = 'marco.montilla@beetcg.com';
+          $mail->Password = 'Marco1695';
+          $mail->SMTPSecure = 'tls';
+          $mail->Port = 587;
+
+          //Recipients
+          $mail->setFrom('no-reply@beetcg.com', 'Beet Community');
+          $mail->addAddress($email_s, $data['fname'] .' '. $data['lname']);
+          $mail->isHTML(true);
+          $mail->Subject = 'Hi '.$data['fname'].' - Recovery Password';
+          $mail->Body = $messageHtml;
+          $mail->AltBody = $messagePlain;
+
+          $mail->send();
+
+          $res = true;
+        } catch (Exception $e) {
+          $res = false;
+        }
+
+      } else {
+        $res = false;
+      }
+	  }
+  }

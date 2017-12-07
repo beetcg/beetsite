@@ -14,7 +14,6 @@ $resp = $obj->checkAcount('client',$id, $salt);
 
 if ($resp['active'] == '1') {
   header('Location: http://comiczone.hol.es/');
-  echo 'alert("esta activo")';
 } else {
   $obj = new Methods();
   $resp = $obj->confirmAcount('client',$id, $salt);
