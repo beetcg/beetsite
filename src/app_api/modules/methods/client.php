@@ -165,7 +165,7 @@
       if ($data) {
         $obj = new Mailer();
         $messageHtml = $obj->recoveryClientHtml($data['fname'],$data['lname'],$data['id'],$data['salt']);
-        $messagePlain = 'Hello';
+        $messagePlain = $obj->recoveryClientPlain($data['fname'],$data['lname'],$data['id'],$data['salt']);
 
         $mail = new PHPMailer(true);
         try {
@@ -193,9 +193,10 @@
         } catch (Exception $e) {
           $res = false;
         }
-
       } else {
         $res = false;
       }
+      
+      return $res
 	  }
   }

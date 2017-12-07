@@ -14,11 +14,11 @@
 
 			if (mysqli_ping($connect)) { $res = true; }
 			mysqli_close($connect);
-			
+
 			return $res;
 		}
 
-		// If exist the User 
+		// If exist the User
 		public function ifExist($table, $email){
 			$obj = new connect();
 			$connect = $obj->connection();
@@ -32,7 +32,7 @@
 
 			if (mysqli_num_rows($result) > 0) {
 		    while($row = mysqli_fetch_assoc($result)) {
-		       $res = true; 
+		       $res = true;
 		       break;
 		    }
 			}
@@ -60,7 +60,7 @@
 			$sql= "INSERT INTO tech (__id, fname, lname, email, tlf, zip, salt, hash, active, hardware, printing, security, television, virus, network, telephone, servers, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip','$salt','$hash','0','0','0','0','0','0','0','0','0','$date','$date')";
 
 			if (mysqli_query($connect, $sql)) {
-			  
+
 			  $res = true;
 
 			  $obj = new Mailer();
@@ -94,7 +94,7 @@
 			}
 
 			mysqli_close($connect);
-			
+
 			return $res;
 		}
 
@@ -128,18 +128,18 @@
 				$date = date("Y-m-d H:i:s", time());
 
 			  $update = "
-			  UPDATE $table 
+			  UPDATE $table
 			  SET id_card='$route',
-			  		hardware='$hardware', 
-			  		printing='$printing', 
-			  		security='$security', 
-			  		television='$television', 
-			  		virus='$virus', 
-			  		network='$network', 
-			  		telephone='$telephone', 
+			  		hardware='$hardware',
+			  		printing='$printing',
+			  		security='$security',
+			  		television='$television',
+			  		virus='$virus',
+			  		network='$network',
+			  		telephone='$telephone',
 			  		servers='$servers',
 			  		active= '1',
-			  		update_at='$date' 
+			  		update_at='$date'
 			  WHERE __id='$id' AND salt='$salt';
 			  ";
 
@@ -151,4 +151,60 @@
 			return $res;
 		}
 
+    // Recovery Password
+    public function recovery($table, $email){
+      $obj = new connect();
+      $connect = $obj->connection();
+      $res = false;
+
+      $email_lower = strtolower($email);
+      $email_s = filter_var($email_lower, FILTER_SANITIZE_EMAIL);
+
+      $sql= "SELECT * FROM $table WHERE email='$email_s'";
+      $result = mysqli_query($connect, $sql);
+
+      if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+          $data = $row;
+          break;
+        }
+      }
+      mysqli_close($connect);
+
+      if ($data) {
+        $obj = new Mailer();
+        $messageHtml = $obj->recoveryTechHtml($data['fname'],$data['lname'],$data['id'],$data['salt']);
+        $messagePlain = $obj->recoveryTechPlain($data['fname'],$data['lname'],$data['id'],$data['salt']);;
+
+        $mail = new PHPMailer(true);
+        try {
+
+          //Server settings
+          $mail->isSMTP();
+          $mail->Host = 'smtp.gmail.com';
+          $mail->SMTPAuth = true;
+          $mail->Username = 'marco.montilla@beetcg.com';
+          $mail->Password = 'Marco1695';
+          $mail->SMTPSecure = 'tls';
+          $mail->Port = 587;
+
+          //Recipients
+          $mail->setFrom('no-reply@beetcg.com', 'Beet Community');
+          $mail->addAddress($email_s, $data['fname'] .' '. $data['lname']);
+          $mail->isHTML(true);
+          $mail->Subject = 'Hi '.$data['fname'].' - Recovery Password';
+          $mail->Body = $messageHtml;
+          $mail->AltBody = $messagePlain;
+
+          $mail->send();
+
+          $res = true;
+        } catch (Exception $e) {
+          $res = false;
+        }
+
+      } else {
+        $res = false;
+      }
+    }
 	}

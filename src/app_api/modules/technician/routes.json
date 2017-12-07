@@ -7,9 +7,9 @@
 		"url" : "./src/app_api/modules/technician/crud/confirm.php",
 		"type" : "POST"
 	},
-	"update" : {
-		"url" : "",
-		"type" : "PUT"
+	"recovery" : {
+		"url" : "./src/app_api/modules/technician/crud/recovery.php",
+		"type" : "POST"
 	},
 	"delete" : {
 		"url" : "",

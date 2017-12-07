@@ -36,7 +36,7 @@ $( document ).ready(function() {
 						'		<ul>'+
 						'			<li>Connection : '+res.connection+'</li>'+
 						'			<li>Found : '+res.found+'</li>'+
-						'			<li>Save : '+res.save+'</li>'+
+						'			<li>Update : '+res.update+'</li>'+
 						'		</ul>'+
 						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
 						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+

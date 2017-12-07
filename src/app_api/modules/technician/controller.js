@@ -158,6 +158,60 @@ $( document ).ready(function() {
 				}
 	})
 
+	/** Recovery Form */
+	$('#recovery_form_tech').on('submit',function(e){
+		e.preventDefault()
+
+		var exp = validateEmail('#emailRT' ,$("#emailRT").val())
+
+		if (exp) {
+			$.ajax({
+				beforeSend: function (){
+					$('#subRT').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
+				},
+				url: route.recovery.url,
+				type: route.recovery.type,
+				data: $('#recovery_form_tech').serialize(),
+				success: function (resp) {
+					res = JSON.parse(resp)
+					if (res.update == true) {
+						$('#recovery_form_tech')[0].reset()
+						$('#subRT').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
+					} else {
+						$('#subRT').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+					}
+					console.log(res)
+					$('#form_message').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<ul>'+
+						'			<li>Connection : '+res.connection+'</li>'+
+						'			<li>Found : '+res.found+'</li>'+
+						'			<li>Update : '+res.update+'</li>'+
+						'		</ul>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+				},
+				error: function (jqXHR,estado,error) {
+					console.log('----------------------')
+					console.log('Status: Entro en error')
+					console.log(estado)
+					console.log(error)
+				},
+				complete: function (jqXHR,estado) {
+				}
+			})
+		} else {
+			$('#form_message').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<h3>Validation problems</h3>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+		}
+	})
 });
 
 /** Validate Functions -----------------------*/
