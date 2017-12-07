@@ -75,7 +75,7 @@
 			    $mail->Host = 'smtp.gmail.com';
 			    $mail->SMTPAuth = true;
 			    $mail->Username = 'marco.montilla@beetcg.com';
-			    $mail->Password = 'Marco1695';
+			    $mail->Password = ' ';
 			    $mail->SMTPSecure = 'tls';
     			$mail->Port = 587;
 
@@ -175,7 +175,7 @@
           $mail->Host = 'smtp.gmail.com';
           $mail->SMTPAuth = true;
           $mail->Username = 'marco.montilla@beetcg.com';
-          $mail->Password = 'Marco1695';
+          $mail->Password = ' ';
           $mail->SMTPSecure = 'tls';
           $mail->Port = 587;
 
@@ -196,7 +196,7 @@
       } else {
         $res = false;
       }
-      
+
       return $res
 	  }
   }
