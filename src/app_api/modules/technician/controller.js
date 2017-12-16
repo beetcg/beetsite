@@ -27,6 +27,7 @@ $( document ).ready(function() {
 					if (res.save == true) {
 						$('#form_create')[0].reset()
 						$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
+						window.location.href = "http://comiczone.hol.es";
 					} else {
 						$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
 					}
@@ -132,7 +133,7 @@ $( document ).ready(function() {
 						success: function (resp) {
 							var res = JSON.parse(resp)
 							console.log(res)
-							if (res.update == true) {
+							if (res.send == true) {
 								$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
 							} else {
 								$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
@@ -174,11 +175,68 @@ $( document ).ready(function() {
 				data: $('#recovery_form_tech').serialize(),
 				success: function (resp) {
 					res = JSON.parse(resp)
-					if (res.update == true) {
+					if (res.send == true) {
 						$('#recovery_form_tech')[0].reset()
 						$('#subRT').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
 					} else {
 						$('#subRT').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+					}
+					console.log(res)
+					$('#form_message').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<ul>'+
+						'			<li>Connection : '+res.connection+'</li>'+
+						'			<li>Found : '+res.found+'</li>'+
+						'			<li>send : '+res.send+'</li>'+
+						'		</ul>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+				},
+				error: function (jqXHR,estado,error) {
+					console.log('----------------------')
+					console.log('Status: Entro en error')
+					console.log(estado)
+					console.log(error)
+				},
+				complete: function (jqXHR,estado) {
+				}
+			})
+		} else {
+			$('#form_message').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<h3>Validation problems</h3>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+		}
+	})
+
+	/** New Password */
+	$('#new_pass_tech').on('submit',function(e){
+		e.preventDefault()
+
+		var exp1 = validatePassword('#pass' ,$("#pass").val())
+		var exp2 = validatePassword('#r_pass' ,$("#r_pass").val())
+		var exp3 = validateSamePassword('#pass', '#r_pass')
+
+		if (exp1 && exp2 && exp3) {
+			$.ajax({
+				beforeSend: function (){
+					$('#sub').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
+				},
+				url: route.update_pass.url,
+				type: route.update_pass.type,
+				data: $('#new_pass_tech').serialize(),
+				success: function (resp) {
+					res = JSON.parse(resp)
+					if (res.update == true) {
+						$('#new_pass_tech')[0].reset()
+						$('#sub').html('<i style="color:green;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+					} else {
+						$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
 					}
 					console.log(res)
 					$('#form_message').html(
@@ -355,6 +413,19 @@ $( document ).ready(function() {
 			return true
 		} else {
 			$('#cbm').show()
+			return false
+		}
+	}
+
+	/**
+	* Validate if the passwords are the same
+	*/
+	function validateSamePassword(input1, input2){
+		if ( $(input1).val() === $(input2).val()) {
+			$('#same').hide()
+			return true
+		} else {
+			$('#same').show()
 			return false
 		}
 	}

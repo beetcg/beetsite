@@ -7,6 +7,10 @@
 		"url" : "./src/app_api/modules/client/crud/recovery.php",
 		"type" : "POST"
 	},
+	"update_pass" : {
+		"url" : "./src/app_api/modules/client/crud/update_pass.php",
+		"type" : "POST"
+	},
 	"update" : {
 		"url" : "",
 		"type" : "PUT"

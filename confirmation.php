@@ -1,7 +1,4 @@
 <?php
-	session_start();
-	session_unset();
-	
 	require_once "./src/app_api/config/connection.php";
 	require_once "./src/app_api/modules/methods/tech.php";
 

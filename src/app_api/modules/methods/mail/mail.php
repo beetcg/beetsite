@@ -182,7 +182,7 @@
 			$message .= '	<table align="center" style="border:1px solid #fff;max-width:700px;">';
 			$message .= '		<tr>';
 			$message .= '			<td colspan="5" style="width:100%;text-align:center;vertical-align:middle">';
-			$message .= '				<img style="width:100%" src="http://comiczone.hol.es/src/assets/img/banner-client.jpg">';
+			$message .= '				<img style="width:100%" src="http://comiczone.hol.es/src/assets/img/banner-tech.jpg">';
 			$message .= '			</td>';
 			$message .= '		</tr>';
 			$message .= '		<tr>';

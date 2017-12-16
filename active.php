@@ -18,6 +18,8 @@ if ($resp['active'] == '1') {
   $obj = new Methods();
   $resp = $obj->confirmAcount('client',$id, $salt);
   if ($resp) {
+    echo "Ativated Acount";
+    sleep(5);
     header('Location: http://comiczone.hol.es/');
   } else {
     echo 'error';

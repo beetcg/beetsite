@@ -6,7 +6,7 @@
 
 	$res = [];
 	$res['found'] = false;
-	$res['update'] = false;
+	$res['send'] = false;
 
 	$obj = new Methods();
 	$resp = $obj->tryToConnect();
@@ -24,9 +24,9 @@
 				if ($res['found']) {
 					$obj = new Methods();
 					$resp = $obj->recovery('client', $email);
-					$res['update'] = $resp;
+					$res['send'] = $resp;
 				} else {
-					$res['update'] = false;
+					$res['send'] = false;
 				}
 
 			}

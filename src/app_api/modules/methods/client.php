@@ -75,7 +75,7 @@
 			    $mail->Host = 'smtp.gmail.com';
 			    $mail->SMTPAuth = true;
 			    $mail->Username = 'marco.montilla@beetcg.com';
-			    $mail->Password = ' ';
+			    $mail->Password = '!Beet3281!';
 			    $mail->SMTPSecure = 'tls';
     			$mail->Port = 587;
 
@@ -164,8 +164,8 @@
 
       if ($data) {
         $obj = new Mailer();
-        $messageHtml = $obj->recoveryClientHtml($data['fname'],$data['lname'],$data['id'],$data['salt']);
-        $messagePlain = $obj->recoveryClientPlain($data['fname'],$data['lname'],$data['id'],$data['salt']);
+        $messageHtml = $obj->recoveryClientHtml($data['fname'],$data['lname'],$data['__id'],$data['salt']);
+        $messagePlain = $obj->recoveryClientPlain($data['fname'],$data['lname'],$data['__id'],$data['salt']);
 
         $mail = new PHPMailer(true);
         try {
@@ -175,7 +175,7 @@
           $mail->Host = 'smtp.gmail.com';
           $mail->SMTPAuth = true;
           $mail->Username = 'marco.montilla@beetcg.com';
-          $mail->Password = ' ';
+          $mail->Password = '!Beet3281!';
           $mail->SMTPSecure = 'tls';
           $mail->Port = 587;
 
@@ -197,6 +197,31 @@
         $res = false;
       }
 
-      return $res
+      return $res;
 	  }
+
+    // Change Password
+    public function new_pass($table, $pass, $id, $salt){
+      $obj = new connect();
+			$connect = $obj->connection();
+			$res = false;
+
+			  date_default_timezone_set('America/Guatemala');
+				$date = date("Y-m-d H:i:s", time());
+        $new_hash = password_hash($pass, PASSWORD_BCRYPT);
+
+			  $update = "
+			  UPDATE $table
+			  SET hash= '$new_hash',
+			  		update_at='$date'
+			  WHERE __id='$id' AND salt='$salt';
+			  ";
+
+			  if (mysqli_query($connect, $update)) {
+			  	$res = true;
+			  }
+
+			mysqli_close($connect);
+			return $res;
+    }
   }
