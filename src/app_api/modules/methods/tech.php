@@ -75,7 +75,7 @@
 			    $mail->Host = 'smtp.gmail.com';
 			    $mail->SMTPAuth = true;
 			    $mail->Username = 'marco.montilla@beetcg.com';
-			    $mail->Password = '!Beet3281!';
+			    $mail->Password = '';
 			    $mail->SMTPSecure = 'tls';
     			$mail->Port = 587;
 
@@ -184,7 +184,7 @@
           $mail->Host = 'smtp.gmail.com';
           $mail->SMTPAuth = true;
           $mail->Username = 'marco.montilla@beetcg.com';
-          $mail->Password = '!Beet3281!';
+          $mail->Password = '';
           $mail->SMTPSecure = 'tls';
           $mail->Port = 587;
 
@@ -202,7 +202,6 @@
         } catch (Exception $e) {
           $res = false;
         }
-
       } else {
         $res = false;
       }
@@ -220,7 +219,7 @@
 
 			  $update = "
 			  UPDATE $table
-			  SET hash= $new_hash,
+			  SET hash= '$new_hash',
 			  		update_at='$date'
 			  WHERE __id='$id' AND salt='$salt';
 			  ";
@@ -232,5 +231,4 @@
 			mysqli_close($connect);
 			return $res;
     }
-
   }
