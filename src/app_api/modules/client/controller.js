@@ -176,6 +176,58 @@ $( document ).ready(function() {
 		}
 	})
 
+	/** Login */
+	$('#form_login_client').on('submit',function(e){
+		e.preventDefault()
+
+		var exp1 = validateEmail('#email_client' ,$("#email_client").val())
+		var exp2 = validatePassword('#pass_client' ,$("#pass_client").val())
+
+		if (exp1 && exp2) {
+			$.ajax({
+				beforeSend: function (){
+					$('#client_sub').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
+				},
+				url: route.login.url,
+				type: route.login.type,
+				data: $('#form_login_client').serialize(),
+				success: function (resp) {
+					res = JSON.parse(resp)
+					if (res.data.active) {
+						Cookies.set('fname', res.data.fname , { expires: 7 });
+						Cookies.set('lname', res.data.lname , { expires: 7 });
+						Cookies.set('email', res.data.email , { expires: 7 });
+						Cookies.set('type', 'client' , { expires: 7 });
+
+						window.location.replace("http://comiczone.hol.es");
+						console.log(res)
+					} else {
+						alert('Usuario y/o contraseña invalida')
+						$('#client_sub').html('<i class="fa fa-times" aria-hidden="true"></i>')
+					}
+				},
+				error: function (jqXHR,estado,error) {
+					console.log('----------------------')
+					console.log('Status: Entro en error')
+					console.log(estado)
+					console.log(error)
+				},
+				complete: function (jqXHR,estado) {
+
+				}
+			})
+		} else {
+			$('#form_message_client').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<h3>Validation problems</h3>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+		}
+
+	})
+
 });
 
 

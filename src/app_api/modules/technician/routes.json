@@ -11,8 +11,8 @@
 		"url" : "./src/app_api/modules/technician/crud/recovery.php",
 		"type" : "POST"
 	},
-	"update_pass" : {
-		"url" : "./src/app_api/modules/technician/crud/update_pass.php",
+	"login" : {
+		"url" : "./src/app_api/modules/technician/crud/login.php",
 		"type" : "POST"
 	},
 	"delete" : {

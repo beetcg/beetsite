@@ -75,7 +75,7 @@
 			    $mail->Host = 'smtp.gmail.com';
 			    $mail->SMTPAuth = true;
 			    $mail->Username = 'marco.montilla@beetcg.com';
-			    $mail->Password = '';
+			    $mail->Password = '!Beet3281!';
 			    $mail->SMTPSecure = 'tls';
     			$mail->Port = 587;
 
@@ -175,7 +175,7 @@
           $mail->Host = 'smtp.gmail.com';
           $mail->SMTPAuth = true;
           $mail->Username = 'marco.montilla@beetcg.com';
-          $mail->Password = '';
+          $mail->Password = '!Beet3281!';
           $mail->SMTPSecure = 'tls';
           $mail->Port = 587;
 
@@ -223,5 +223,33 @@
 
 			mysqli_close($connect);
 			return $res;
+    }
+
+    // Log-in
+    public function login($table, $email, $pass){
+      $obj = new connect();
+      $connect = $obj->connection();
+      $res = 'not found';
+      $email_lower = strtolower($email);
+			$email_s = filter_var($email_lower, FILTER_SANITIZE_EMAIL);
+
+      $sql= "SELECT * FROM $table WHERE email='$email_s'";
+			$result = mysqli_query($connect, $sql);
+
+			if (mysqli_num_rows($result) > 0) {
+			  while($row = mysqli_fetch_assoc($result)) {
+			    $res = $row;
+			    break;
+			  }
+			}
+			mysqli_close($connect);
+
+      if ($res) {
+        if ( password_verify($pass, $res['hash']) ) {
+          return $row;
+        }
+      } else {
+        return $res;
+      }
     }
   }

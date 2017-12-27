@@ -133,7 +133,7 @@ $( document ).ready(function() {
 						success: function (resp) {
 							var res = JSON.parse(resp)
 							console.log(res)
-							if (res.send == true) {
+							if (res.update == true) {
 								$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
 							} else {
 								$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
@@ -269,6 +269,59 @@ $( document ).ready(function() {
 						'		</button>'+
 						'</div>' )
 		}
+	})
+
+	/** Login */
+	$('#form_login_tech').on('submit',function(e){
+		e.preventDefault()
+
+		var exp1 = validateEmail('#email_tech' ,$("#email_tech").val())
+		var exp2 = validatePassword('#pass_tech' ,$("#pass_tech").val())
+
+		if (exp1 && exp2) {
+			$.ajax({
+				beforeSend: function (){
+					$('#tech_sub').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>')
+				},
+				url: route.login.url,
+				type: route.login.type,
+				data: $('#form_login_tech').serialize(),
+				success: function (resp) {
+					console.log(resp);
+					res = JSON.parse(resp)
+					if (res.active) {
+						Cookies.set('fname', res.data.fname , { expires: 7 });
+						Cookies.set('lname', res.data.lname , { expires: 7 });
+						Cookies.set('email', res.data.email , { expires: 7 });
+						Cookies.set('type', 'tech' , { expires: 7 });
+
+						window.location.replace("http://comiczone.hol.es");
+						console.log(res)
+					} else {
+						alert('Usuario y/o contraseña invalida')
+						$('#tech_sub').html('<i class="fa fa-times" aria-hidden="true"></i>')
+					}
+				},
+				error: function (jqXHR,estado,error) {
+					console.log('----------------------')
+					console.log('Status: Entro en error')
+					console.log(estado)
+					console.log(error)
+				},
+				complete: function (jqXHR,estado) {
+
+				}
+			})
+		} else {
+			$('#form_message_tech').html(
+						'<div class="alert alert-light alert-dismissible fade show" role="alert">'+
+						'		<h3>Validation problems</h3>'+
+						'		<button class="close" data-dismiss="alert" aria-label="Close">'+
+						'			<i class="fa fa-window-close" aria-hidden="true"></i>'+
+						'		</button>'+
+						'</div>' )
+		}
+
 	})
 });
 

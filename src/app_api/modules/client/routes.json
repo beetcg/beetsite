@@ -11,9 +11,9 @@
 		"url" : "./src/app_api/modules/client/crud/update_pass.php",
 		"type" : "POST"
 	},
-	"update" : {
-		"url" : "",
-		"type" : "PUT"
+	"login" : {
+		"url" : "./src/app_api/modules/client/crud/login.php",
+		"type" : "POST"
 	},
 	"delete" : {
 		"url" : "",
