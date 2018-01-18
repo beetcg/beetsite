@@ -75,7 +75,7 @@
 			    $mail->Host = 'smtp.gmail.com';
 			    $mail->SMTPAuth = true;
 			    $mail->Username = 'marco.montilla@beetcg.com';
-			    $mail->Password = '!Beet3281!';
+			    $mail->Password = '';
 			    $mail->SMTPSecure = 'tls';
     			$mail->Port = 587;
 
@@ -137,7 +137,7 @@
 		}
 
 		// Activate acount
-		public function activateAcount($table, $id, $salt){
+		public function activateAcount($table, $id, $salt, $id_card){
 			$obj = new connect();
 			$connect = $obj->connection();
 			$res = false;
@@ -147,7 +147,8 @@
 
 			  $update = "
 			  UPDATE $table
-			  SET active= '1',
+			  SET id_card='$id_card',
+			  		active= '1',
 			  		update_at='$date'
 			  WHERE __id='$id' AND salt='$salt';
 			  ";
@@ -193,7 +194,7 @@
           $mail->Host = 'smtp.gmail.com';
           $mail->SMTPAuth = true;
           $mail->Username = 'marco.montilla@beetcg.com';
-          $mail->Password = '!Beet3281!';
+          $mail->Password = '';
           $mail->SMTPSecure = 'tls';
           $mail->Port = 587;
 

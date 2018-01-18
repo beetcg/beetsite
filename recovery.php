@@ -61,7 +61,7 @@
 							class="form-control"
 							name="r_pass"
 							id="r_pass"
-							placeholder="Pepeat Password">
+							placeholder="Repeat Password">
 							<div class="invalid-feedback">
 								The PASSWORD is invalid
 								<ul>

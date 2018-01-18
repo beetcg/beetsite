@@ -77,7 +77,7 @@
 
 				if ($res['picUpload'] && $res['subcategory']) {
 					$obj = new Methods();
-					$resp = $obj->activateAcount('tech', $id, $salt);
+					$resp = $obj->activateAcount('tech', $id, $salt, $final_route);
 					$res['active'] = $resp;
 				}
 
