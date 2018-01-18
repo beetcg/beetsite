@@ -67,54 +67,22 @@ $( document ).ready(function() {
 
 	/** Confirm Form */
 	$('#form_confirm').on('submit',function(e){
-				e.preventDefault()
+		e.preventDefault()
 
-				var formData = new FormData;
+		var subcat = []
+		for (var i = 1; i <= 24; i++) {
+			var aux = '#'+i
+			
+			if ($(aux).is(':checked')) {
+				subcat.push( $(aux).val() )	
+			}
+		}
+
+		var formData = new FormData;
 				formData.append('id', $('#id').val())
 				formData.append('salt', $('#salt').val())
-
-				formData.append('id_card', $('#id_card')[0].files[0])
-
-				if ($('#hardware').is(':checked')) {
-					formData.append('hardware', $('#hardware').val())
-				} else {
-					formData.append('hardware', '0')
-				}
-				if ($('#printing').is(':checked')) {
-					formData.append('printing', $('#printing').val())
-				} else {
-					formData.append('printing', '0')
-				}
-				if ($('#security').is(':checked')) {
-					formData.append('security', $('#security').val())
-				} else {
-					formData.append('security', '0')
-				}
-				if ($('#television').is(':checked')) {
-					formData.append('television', $('#television').val())
-				} else {
-					formData.append('television', '0')
-				}
-				if ($('#virus').is(':checked')) {
-					formData.append('virus', $('#virus').val())
-				} else {
-					formData.append('virus', '0')
-				}
-				if ($('#network').is(':checked')) {
-					formData.append('network', $('#network').val())
-				} else {
-					formData.append('network', '0')
-				}
-				if ($('#telephone').is(':checked')) {
-					formData.append('telephone', $('#telephone').val())
-				} else {
-					formData.append('telephone', '0')
-				}
-				if ($('#servers').is(':checked')) {
-					formData.append('servers', $('#servers').val())
-				} else {
-					formData.append('servers', '0')
-				}
+		 		formData.append('id_card', $('#id_card')[0].files[0])
+				formData.append('subcat', subcat)		
 
 				var exp1 = validateImage('#id_card' , $('#id_card')[0].files[0])
 				var exp2 = validateCheckbox()
@@ -133,10 +101,13 @@ $( document ).ready(function() {
 						success: function (resp) {
 							var res = JSON.parse(resp)
 							console.log(res)
-							if (res.update == true) {
+							if (res.active == true) {
 								$('#sub').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
+								window.location.href = "http://comiczone.hol.es/login.php";
+								alert('Se Activo la cuenta con exito')
 							} else {
 								$('#sub').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+								alert('HEYY ALGO PASO QUE NO PUDISTE ACTIVAR LA VAINA')
 							}
 						},
 						error: function (jqXHR,estado,error) {
@@ -459,9 +430,14 @@ $( document ).ready(function() {
 	* At least one has to be selected
 	*/
 	function validateCheckbox(){
-		if ( $('#hardware').is(':checked')   || $('#printing').is(':checked') || $('#security').is(':checked') ||
-			   $('#television').is(':checked') || $('#virus').is(':checked')    || $('#network').is(':checked')  ||
-			   $('#telephone').is(':checked')  || $('#servers').is(':checked')	) {
+		var count = 0;
+		for (var i = 1; i <= 24; i++) {
+			var aux = '#'+i
+			if ( $(aux).is(':checked') ) {
+				count++;
+			}
+		}
+		if ( count > 0) {
 			$('#cbm').hide()
 			return true
 		} else {

@@ -57,7 +57,7 @@
 			$activate_code = md5(uniqid()).uniqid();
 			$date = date("Y-m-d H:i:s", time());
 
-			$sql= "INSERT INTO tech (__id, fname, lname, email, tlf, zip, salt, hash, active, hardware, printing, security, television, virus, network, telephone, servers, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip','$salt','$hash','0','0','0','0','0','0','0','0','0','$date','$date')";
+			$sql= "INSERT INTO tech (__id, fname, lname, email, tlf, zip, salt, hash, active, created_at, update_at) VALUES ('$id','$fname','$lname','$email_s','$tlf','$zip','$salt','$hash','0','$date','$date')";
 
 			if (mysqli_query($connect, $sql)) {
 
@@ -118,8 +118,26 @@
 			return $res;
 		}
 
-		// Confirm acount
-		public function confirmAcount($table, $id, $salt, $route, $hardware, $printing, $security, $television, $virus, $network, $telephone, $servers){
+		// Save Subcategories
+		public function saveSubcategory($sub, $id){
+			$obj = new connect();
+			$connect = $obj->connection();
+			$res = false;
+
+			$sql= "INSERT INTO subcat_tech (id_tech, id_subc) VALUES ('$id', '$sub');";
+			
+			if ( mysqli_query($connect, $sql) ) {
+			  $res = true;
+			} else {
+			  $res = false;
+			}
+
+			mysqli_close($connect);
+			return $res;
+		}
+
+		// Activate acount
+		public function activateAcount($table, $id, $salt){
 			$obj = new connect();
 			$connect = $obj->connection();
 			$res = false;
@@ -129,16 +147,7 @@
 
 			  $update = "
 			  UPDATE $table
-			  SET id_card='$route',
-			  		hardware='$hardware',
-			  		printing='$printing',
-			  		security='$security',
-			  		television='$television',
-			  		virus='$virus',
-			  		network='$network',
-			  		telephone='$telephone',
-			  		servers='$servers',
-			  		active= '1',
+			  SET active= '1',
 			  		update_at='$date'
 			  WHERE __id='$id' AND salt='$salt';
 			  ";

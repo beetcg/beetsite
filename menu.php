@@ -24,7 +24,8 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <!-- <ul class="navbar-nav mr-auto"> -->
+    <ul class="navbar-nav mr-auto">
+    </ul>
 			<form class="form-inline">
 				<?php if ($status) { ?>
 					<div class="input-group">
@@ -42,6 +43,5 @@
 					</div>
 				<?php } ?>
 			</form>
-    <!-- </ul> -->
   </div>
 </nav>
