@@ -31,14 +31,14 @@
 					<div class="input-group">
 						<input type="text" value="Hi <?php echo $_SESSION['fname'].' '.$_SESSION['lname']; ?>" class="form-control text-center" readonly>
 			      <span class="input-group-btn">
-			        <a href="./logout.php" class="btn btn-outline-danger">Log Out</a>
+			        <a href="./logout" class="btn btn-outline-danger">Log Out</a>
 			      </span>
 			    </div>
 				<?php } ?>
 				<?php if (!$status) { ?>
 					<div class="input-group">
 						<span class="input-group-btn">
-							<a href="./login.php" class="btn btn-outline-info">Log In</a>
+							<a href="./login" class="btn btn-outline-info">Log In</a>
 						</span>
 					</div>
 				<?php } ?>

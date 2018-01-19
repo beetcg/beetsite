@@ -1,7 +1,9 @@
 <?php
+	require_once "./../../../../../vendor/autoload.php";
 	require_once "./../../../config/connection.php";
+	require_once "./../../methods/mail/mail.php";
 	require_once "./../../methods/client.php";
-
+	
 	$res = [];
 	$res['found'] = false;
 	$res['update'] = false;

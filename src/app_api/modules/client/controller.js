@@ -83,8 +83,10 @@ $( document ).ready(function() {
 					if (res.send == true) {
 						$('#recovery_form_client')[0].reset()
 						$('#subRC').html('<i style="color:green;" class="fa fa-floppy-o" aria-hidden="true"></i>')
+						alert('Mensaje enviado')
 					} else {
 						$('#subRC').html('<i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>')
+						alert('Ups! hubo un problema')
 					}
 					console.log(res)
 					$('#form_message').html(
@@ -255,9 +257,10 @@ $( document ).ready(function() {
 
 	/**
 	* Validate the email
+	* As per RFC2822 standards.
 	*/
 	function validateEmail(input, str){
-		if ( str.match(/^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/g) ) {
+		if ( str.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g) ) {
 			$(input).addClass('is-valid')
 			$(input).removeClass('is-invalid')
 

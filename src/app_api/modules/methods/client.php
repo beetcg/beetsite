@@ -218,11 +218,52 @@
 			  ";
 
 			  if (mysqli_query($connect, $update)) {
-			  	$res = true;
-			  }
+			  $sql= "SELECT * FROM $table WHERE __id='$id' AND salt='$salt'";
+	      $result = mysqli_query($connect, $sql);
 
-			mysqli_close($connect);
-			return $res;
+	      if (mysqli_num_rows($result) > 0) {
+	        while($row = mysqli_fetch_assoc($result)) {
+	          $data = $row;
+	          break;
+	        }
+	      }
+
+			  $res = $data;
+
+			  $obj = new Mailer();
+			  $messageHtml = $obj->clientSuccessRecoveryHtml($data['fname'],$data['lname'],$id,$salt);
+			  $messagePlain = $obj->clientSuccessRecoveryPlain($data['fname'],$data['lname'],$id,$salt);
+
+				$mail = new PHPMailer(true);
+				try {
+
+			    //Server settings
+			    $mail->isSMTP();
+			    $mail->Host = 'smtp.gmail.com';
+			    $mail->SMTPAuth = true;
+			    $mail->Username = 'marco.montilla@beetcg.com';
+			    $mail->Password = '';
+			    $mail->SMTPSecure = 'tls';
+    			$mail->Port = 587;
+
+				//Recipients
+          $mail->setFrom('no-reply@beetcg.com', 'Beet Community');
+          $mail->addAddress($data['email'], $data['fname'].' '. $data['lname']);
+          $mail->isHTML(true);
+          $mail->Subject = 'Hi '.$data['fname'].' - Password Changed';
+          $mail->Body = $messageHtml;
+          $mail->AltBody = $messagePlain;
+
+          $mail->send();
+
+          $res = true;
+        } catch (Exception $e) {
+          $res = $mail->ErrorInfo;
+        }
+      } else {
+        $res = false;
+      }
+      return $res;
     }
 
     // Log-in

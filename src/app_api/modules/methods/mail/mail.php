@@ -168,6 +168,74 @@
 			return $message;
 		}
 
+		// Success Recovery Tech HTML
+		public function techSuccessRecoveryHtml($fname,$lname,$id,$salt){
+			$message  = '<!DOCTYPE html>';
+			$message .= '<html lang="en">';
+			$message .= '<head>';
+			$message .= '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+			$message .= '	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">';
+			$message .= '</head>';
+			$message .= '<html>';
+			$message .= '<body style="font-family:Verdana, Geneva, sans-serif;color:black;">';
+			$message .= '	<table align="center" style="border:1px solid #fff;max-width:700px;">';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="width:100%;text-align:center;vertical-align:middle">';
+			$message .= '				<img style="width:100%" src="http://comiczone.hol.es/src/assets/img/banner-tech.jpg">';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td><br><br></td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;"><p style="font-size:1.5rem;">';
+			$message .= '				HOLA '.strtoupper($fname).'!';
+			$message .= '			</p></td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;">';
+			$message .= '				<p style="font-size:1rem;">	';
+			$message .= '					<b>Your Password has been changed (Tech)</b> ';
+			$message .= '				</p>';
+			$message .= '				<br>';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;">';
+			$message .= '				<p style="font-size:1rem;">';
+			$message .= '					<br><br>	';
+			$message .= '					Thanks for enjoy to the Beet Communitiy!';
+			$message .= '					<br><br>';
+			$message .= '					Beet Support.';
+			$message .= '				</p>';
+			$message .= '				<br>';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td>';
+			$message .= '				<hr>';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '	</table>';
+			$message .= '</body>';
+			$message .= '</html>';
+
+			return $message;
+		}
+
+		// Recovery tech Text (Technician)
+		public function techSuccessRecoveryPlain($fname,$lname,$id,$salt){
+
+			$message  = "Hola ".$fname." ".$lname."";
+			$message .= "\n";
+			$message .= "Your Password has been changed (tech)";
+			$message .= "\n";
+			$message .= "Thanks for enjoy to the Beet Communitiy!";
+			$message .= "Beet Support.";
+
+			return $message;
+		}
+
 
 		// Email HTML (Client)
 		public function clientHtml($fname,$lname,$id,$salt){
@@ -324,6 +392,74 @@
 			$message .= "Recovery Password Client";
 			$message .= "\n";
 			$message .= "http://comiczone.hol.es/recovery.php?x=".$id."&y=".$salt."&t=tech";
+			$message .= "\n";
+			$message .= "Thanks for enjoy to the Beet Communitiy!";
+			$message .= "Beet Support.";
+
+			return $message;
+		}
+
+		// Success Recovery Client HTML
+		public function clientSuccessRecoveryHtml($fname,$lname,$id,$salt){
+			$message  = '<!DOCTYPE html>';
+			$message .= '<html lang="en">';
+			$message .= '<head>';
+			$message .= '	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+			$message .= '	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">';
+			$message .= '</head>';
+			$message .= '<html>';
+			$message .= '<body style="font-family:Verdana, Geneva, sans-serif;color:black;">';
+			$message .= '	<table align="center" style="border:1px solid #fff;max-width:700px;">';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="width:100%;text-align:center;vertical-align:middle">';
+			$message .= '				<img style="width:100%" src="http://comiczone.hol.es/src/assets/img/banner-tech.jpg">';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td><br><br></td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;"><p style="font-size:1.5rem;">';
+			$message .= '				HOLA '.strtoupper($fname).'!';
+			$message .= '			</p></td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;">';
+			$message .= '				<p style="font-size:1rem;">	';
+			$message .= '					<b>Your Password has been changed (Client)</b> ';
+			$message .= '				</p>';
+			$message .= '				<br>';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td colspan="5" style="padding-left:30px;padding-right:30px;">';
+			$message .= '				<p style="font-size:1rem;">';
+			$message .= '					<br><br>	';
+			$message .= '					Thanks for enjoy to the Beet Communitiy!';
+			$message .= '					<br><br>';
+			$message .= '					Beet Support.';
+			$message .= '				</p>';
+			$message .= '				<br>';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '		<tr>';
+			$message .= '			<td>';
+			$message .= '				<hr>';
+			$message .= '			</td>';
+			$message .= '		</tr>';
+			$message .= '	</table>';
+			$message .= '</body>';
+			$message .= '</html>';
+
+			return $message;
+		}
+
+		// Recovery Client Text (Technician)
+		public function clientSuccessRecoveryPlain($fname,$lname,$id,$salt){
+
+			$message  = "Hola ".$fname." ".$lname."";
+			$message .= "\n";
+			$message .= "Your Password has been changed (Client)";
 			$message .= "\n";
 			$message .= "Thanks for enjoy to the Beet Communitiy!";
 			$message .= "Beet Support.";
