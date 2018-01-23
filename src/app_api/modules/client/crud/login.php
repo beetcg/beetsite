@@ -7,6 +7,7 @@
 	$obj = new Methods();
 	$resp = $obj->tryToConnect();
 	$res['connection'] = $resp;
+	$res['active'] = false;
 
 	if(!empty($_POST)){
 		$email = $_POST["email"];
@@ -20,8 +21,6 @@
 				if ($user['active'] == '1') {
 					$res['data'] = $user;
 					$res['active'] = true;
-				} else {
-					$res['active'] = false;
 				}
 			}
 		}

@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+if (isset($_COOKIE['email'])) {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,22 +12,24 @@
 	<script src="https://use.fontawesome.com/e7cf633633.js"></script>
 </head>
 <body>
-<?php require_once 'menu.php'; ?>
+<?php require_once 'menu.php'; 
+if ($_SESSION['type'] == 'tech') {
+	$type = "Technician ";
+} else {
+	$type = '';
+}
+?>
 
 	<div class="container">
 		<div class="row my-5">
-			<div class="col-md-6 offset-md-3 my-5">
-				<?php if (!$status) { ?>
-	        <div class="row">
-						<a class="btn btn-info btn-lg btn-block" href="./client">Client's registry</a>
-	        </div>
-					<hr>
-					<div class="row">
-						<a class="btn btn-info btn-lg btn-block" href="./tech">Technician's registry</a>
-					</div>
-				<?php } else {?>
-					<h1 class="text-center display-3">Hello <?php echo strtoupper ($_SESSION['fname']); ?></h1>
-				<?php } ?>
+			<div class="col-md-6 offset-md-3 my-2">
+				<h1 class="text-center">Wellcome</h1>
+    		<h2 class="text-center">
+    			<?php echo $type.$_SESSION['fname']." ".$_SESSION['lname'];?>
+    			<br>
+					<small><?php echo $_SESSION['email'];?></small>
+    		</h2>
+				 
 			</div>
 		</div>
 	</div>
@@ -38,3 +42,8 @@
 
 </body>
 </html>
+<?php 
+	} else { // Fin del if
+		header('Location: http://comiczone.hol.es/login');
+	}
+?>

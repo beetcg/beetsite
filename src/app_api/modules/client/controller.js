@@ -195,13 +195,13 @@ $( document ).ready(function() {
 				data: $('#form_login_client').serialize(),
 				success: function (resp) {
 					res = JSON.parse(resp)
-					if (res.data.active) {
+					if (res.active) {
 						Cookies.set('fname', res.data.fname , { expires: 7 });
 						Cookies.set('lname', res.data.lname , { expires: 7 });
 						Cookies.set('email', res.data.email , { expires: 7 });
 						Cookies.set('type', 'client' , { expires: 7 });
 
-						window.location.replace("http://comiczone.hol.es");
+						window.location.replace("http://comiczone.hol.es/dashboard");
 						console.log(res)
 					} else {
 						alert('Usuario y/o contraseña invalida')

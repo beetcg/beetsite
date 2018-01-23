@@ -266,7 +266,7 @@ $( document ).ready(function() {
 						Cookies.set('email', res.data.email , { expires: 7 });
 						Cookies.set('type', 'tech' , { expires: 7 });
 
-						window.location.replace("http://comiczone.hol.es");
+						window.location.replace("http://comiczone.hol.es/dashboard");
 						console.log(res)
 					} else {
 						alert('Usuario y/o contraseña invalida')

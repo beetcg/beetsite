@@ -25,6 +25,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+    	<?php if ($status) { ?>
+    	<li class="nav-item active">
+				<a class="btn btn-outline-light" href="/dashboard">Dashboad</span></a>
+			</li>
+			<?php } ?>
     </ul>
 			<form class="form-inline">
 				<?php if ($status) { ?>
